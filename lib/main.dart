@@ -32,7 +32,7 @@ void setDpiAwareness() {
       shcore.lookupFunction<Int32 Function(Int32), int Function(int)>(
           'SetProcessDpiAwareness');
 
-  // Set process DPI awareness to "Per-Monitor DPI Aware"
+  // Set process DPI awareness to "Per-Monitor DPyI Aware"
   setProcessDpiAwareness(2);
 }
 
