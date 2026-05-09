@@ -215,7 +215,7 @@ class _DepartamentHomePageState extends State<DepartamentHomePage> {
                                         ),
                                         DisplayInfoContainer(
                                           infoToDisplay:
-                                              provider.assistentName!,
+                                              provider.assistentName ?? '',
                                           whatToDisplay: "Assistent",
                                           icon: FontAwesomeIcons.userTie,
                                         ),

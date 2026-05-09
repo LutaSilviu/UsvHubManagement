@@ -180,7 +180,6 @@ class DepartamentHomeProvider extends ChangeNotifier {
       value.fold(
         (failure) {
           setErrorMessage(failure.message);
-          setIsLoading(false);
         },
         (user) {
           // setIsLoading(false);
