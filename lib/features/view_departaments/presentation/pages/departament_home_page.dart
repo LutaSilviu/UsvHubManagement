@@ -297,7 +297,7 @@ class _DepartamentHomePageState extends State<DepartamentHomePage> {
                                             ),
                                             onPressed: () async {
                                               provider.setSelectedCourse(index);
-                                              provider.getNames();
+                                              await provider.getNames();
                                             },
                                           );
                                         },

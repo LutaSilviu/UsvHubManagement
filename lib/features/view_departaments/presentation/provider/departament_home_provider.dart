@@ -183,7 +183,7 @@ class DepartamentHomeProvider extends ChangeNotifier {
           setIsLoading(false);
         },
         (user) {
-          setIsLoading(false);
+          // setIsLoading(false);
           _teacherName = user.name;
         },
       );

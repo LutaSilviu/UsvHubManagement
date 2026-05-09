@@ -5,7 +5,6 @@ import 'package:usv_hub_management/features/add_teacher/presentation/widgets/my_
 import 'package:usv_hub_management/features/add_teacher/presentation/provider/form_provider.dart';
 import 'package:usv_hub_management/features/add_teacher/presentation/provider/home_page_provider.dart';
 import 'package:usv_hub_management/features/view_departaments/domain/entities/departament_entity.dart';
-import 'package:usv_hub_management/features/view_departaments/presentation/provider/departament_home_provider.dart';
 import 'package:usv_hub_management/features/view_departaments/presentation/widgets/custom_button.dart';
 import 'package:usv_hub_management/features/view_departaments/presentation/widgets/display_info_container.dart';
 import 'package:usv_hub_management/injection.dart';
@@ -21,46 +20,6 @@ class TeachersHomePage extends StatefulWidget {
 }
 
 class _TeacherHomePageState extends State<TeachersHomePage> {
-  late HomePageProvider _provider;
-  @override
-  void initState() {
-    _provider = context.read<HomePageProvider>();
-    // Set a listener to the provider's isError property
-    _provider.addListener(showDialogIfError);
-
-    super.initState();
-  }
-
-  void showDialogIfError() async {
-    if (context.read<DepartamentHomeProvider>().errorMessage != null) {
-      await showDialog<String>(
-        context: context,
-        builder: (_) => ContentDialog(
-          title: const Text('An error occurred'),
-          content: Text(
-            context.read<DepartamentHomeProvider>().errorMessage!,
-          ),
-          actions: [
-            FilledButton(
-              child: const Text('Ok'),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ],
-        ),
-      );
-      if (mounted) {
-        context.read<DepartamentHomeProvider>().setErrorMessage(null);
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    // Remove the listener
-    _provider.removeListener(showDialogIfError);
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
@@ -239,115 +198,6 @@ class _TeacherHomePageState extends State<TeachersHomePage> {
                             Expanded(child: Container()),
                           ],
                         ),
-                      //   Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: [
-                      //       provider.getSelectedDepartament() != null
-                      //           ? SelectSemester(
-                      //               h: h,
-                      //               provider: provider,
-                      //             )
-                      //           : Container(),
-                      //       provider.getSelectedSemesterEntity() != null &&
-                      //               provider.getSelectedDepartament() != null &&
-                      //               provider.selectedCourse != null
-                      //           ? Container(
-                      //               decoration: BoxDecoration(
-                      //                 color: AppColors.secondary,
-                      //                 borderRadius: BorderRadius.circular(10),
-                      //               ),
-                      //               height: h > 600 ? h * 0.65 : h * 0.6,
-                      //               width: w > 800 ? w * 0.3 : w * 0.4,
-                      //               child: const SingleChildScrollView(
-                      //                 child: Column(
-                      //                   mainAxisAlignment:
-                      //                       MainAxisAlignment.start,
-                      //                   crossAxisAlignment:
-                      //                       CrossAxisAlignment.start,
-                      //                   children: [
-                      //                     Text("Course name: <NUME>"),
-                      //                     Text("Department: <DEPARTAMENT>"),
-                      //                     Text("Semester: <SEMESTRU>"),
-                      //                     Text("Numar credite : <NUMAR>"),
-                      //                     Text("Profesor: <PROFESOR>"),
-                      //                     Text("Assistent: <ASISTENT>"),
-                      //                     Text(
-                      //                         "Numar de cursuri: <NUMAR_CURSURI>"),
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //             )
-                      //           : Container(),
-                      //       provider.getSelectedSemesterEntity() != null &&
-                      //               provider.getSelectedDepartament() != null
-                      //           ? Column(
-                      //               children: [
-                      //                 Padding(
-                      //                   padding: EdgeInsets.only(right: w * 0.01),
-                      //                   child: FilledButton(
-                      //                     style: ButtonStyle(
-                      //                       backgroundColor:
-                      //                           WidgetStateProperty.resolveWith(
-                      //                               (states) {
-                      //                         if (states.isHovered) {
-                      //                           return AppColors
-                      //                               .onTertiaryContainer
-                      //                               .withValues(1);
-                      //                         }
-                      //                         if (states.isPressed) {
-                      //                           return AppColors
-                      //                               .onTertiaryContainer
-                      //                               .withValues(alpha: 0.5);
-                      //                         }
-                      //                         return AppColors.onTertiaryContainer
-                      //                             .withValues(alpha: 0.5);
-                      //                       }),
-                      //                     ),
-                      //                     child: const Text("Add a new Course"),
-                      //                     onPressed: () {},
-                      //                   ),
-                      //                 ),
-                      //                 SizedBox(
-                      //                   width: w > 1000 ? w * 0.15 : w * 0.25,
-                      //                   height: h > 600 ? h * 0.65 : h * 0.6,
-                      //                   child: ListView.builder(
-                      //                     itemCount: provider.courses.length,
-                      //                     itemBuilder: (_, index) {
-                      //                       bool isSelected =
-                      //                           provider.selectedCourse == index;
-                      //                       CourseEntity course =
-                      //                           provider.courses[index];
-                      //                       return ListTile(
-                      //                         title: Text(
-                      //                           course.title,
-                      //                           style: TextStyle(
-                      //                             color: isSelected
-                      //                                 ? AppColors.white
-                      //                                 : AppColors.white
-                      //                                     .withValues(alpha: 0.5),
-                      //                           ),
-                      //                         ),
-                      //                         subtitle: Text(
-                      //                           course.courseCredits.toString(),
-                      //                           style: TextStyle(
-                      //                             color: isSelected
-                      //                                 ? AppColors.white
-                      //                                 : AppColors.white
-                      //                                     .withValues(alpha: 0.5),
-                      //                           ),
-                      //                         ),
-                      //                         onPressed: () {
-                      //                           provider.setSelectedCourse(index);
-                      //                         },
-                      //                       );
-                      //                     },
-                      //                   ),
-                      //                 ),
-                      //               ],
-                      //             )
-                      //           : Container(),
-                      //     ],
-                      //   ),
                     ],
                   ),
                 );

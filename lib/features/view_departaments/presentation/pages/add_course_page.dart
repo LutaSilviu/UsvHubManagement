@@ -81,7 +81,6 @@ class _BodyWidgetState extends State<BodyWidget> {
 
   @override
   void dispose() {
-    context.read<AddCourseProvider>().removeListener(showErrorFunc);
     super.dispose();
   }
 
@@ -291,9 +290,11 @@ class _BodyWidgetState extends State<BodyWidget> {
                                       children: [
                                         Button(
                                           child: const Text('Add course'),
-                                          onPressed: () {
-                                            provider.addCourse();
-                                            Navigator.of(context).pop();
+                                          onPressed: () async {
+                                            await provider.addCourse();
+                                            if (context.mounted) {
+                                              Navigator.of(context).pop();
+                                            }
                                           },
                                         ),
                                       ],

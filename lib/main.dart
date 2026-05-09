@@ -106,6 +106,7 @@ void main() async {
     // Show the window
     await windowManager.show();
   });
+  //remove debug banner
 
   runApp(const MyApp());
 }
@@ -128,6 +129,7 @@ class MyApp extends StatelessWidget {
     return ResponsiveApp(
       builder: (_) {
         return FluentApp(
+          debugShowCheckedModeBanner: false,
           scrollBehavior: CustomScrollBehavior(),
           theme: FluentThemeData(
             brightness: Brightness.light,
@@ -277,7 +279,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
             PaneItem(
                 //use Font Awsome Icons for the icon,
                 icon: const FaIcon(FontAwesomeIcons.calendar),
-                title: const Text('Students'),
+                title: const Text('Events'),
                 body: const EventHomePage()),
             PaneItem(
               //use Font Awsome Icons for the icon,

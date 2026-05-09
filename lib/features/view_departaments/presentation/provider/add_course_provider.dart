@@ -168,11 +168,11 @@ class AddCourseProvider extends ChangeNotifier {
     }
     Map<String, dynamic> schedule = {
       AppFields.classWhereHeld: _classWhereHeld,
-      AppFields.classType: _classType.toString().split('.').last,
+      AppFields.classType: _classType!.stringValue,
       AppFields.dayOfWeek: _dayOfWeek!.index,
       AppFields.startingHour: _selectedStartHour!.hour,
       AppFields.endingHour: _selectedEndHour!.hour,
-      AppFields.courseFrequency: _courseFrequency.toString().split('.').last,
+      AppFields.courseFrequency: _courseFrequency!.stringValue,
     };
 
     _schedule.add(schedule);

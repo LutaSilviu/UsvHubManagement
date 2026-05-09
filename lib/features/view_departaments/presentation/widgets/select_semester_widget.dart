@@ -41,18 +41,31 @@ class SelectSemester extends StatelessWidget {
             child: ListView.builder(
                 itemCount: lenght, // ,
                 itemBuilder: (_, index) {
-                  return GestureDetector(
-                    onTap: () => onTap(index),
-                    child: Card(
-                        margin: EdgeInsets.symmetric(vertical: h * 0.005),
-                        backgroundColor: selectedSemester == index //
-                            ? AppColors.onSecondary
-                            : AppColors.secondary,
-                        child: Text(
-                          getTitle(
-                              index), // provider.getSemester(index).semesterNumber.toString(),
-                        )),
+                  return ListTile(
+                    tileColor: selectedSemester == index
+                        ? WidgetStatePropertyAll(
+                            AppColors.onPrimary.withValues(alpha: 0.5),
+                          )
+                        : const WidgetStatePropertyAll(
+                            AppColors.primaryFixed,
+                          ),
+                    title: Text(
+                      "Semestrul ${getTitle(index)}", // provider.getSemester(index).semesterNumber.toString(),
+                    ),
+                    onPressed: () {
+                      onTap(index);
+                    },
                   );
+
+                  //   return GestureDetector(
+
+                  //     child: Card(
+                  //         margin: EdgeInsets.symmetric(vertical: h * 0.005),
+                  //         backgroundColor:  == index //
+                  //             ? AppColors.onSecondary
+                  //             : AppColors.secondary,
+                  //         child: ),
+                  //   );
                 }),
           ),
         ],
